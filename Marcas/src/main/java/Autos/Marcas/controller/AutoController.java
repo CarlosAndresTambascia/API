@@ -15,9 +15,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import Autos.Marcas.converter.AutoConverter;
 import Autos.Marcas.entities.Auto;
+import Autos.Marcas.entities.Marca;
 import Autos.Marcas.request.AutoRequest;
+import Autos.Marcas.request.MarcaRequest;
 import Autos.Marcas.response.AutoWrapper;
 import Autos.Marcas.services.AutoService;
+import Autos.Marcas.services.MarcaService;
 
 @RestController
 @RequestMapping(value = "/api", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -28,6 +31,8 @@ public class AutoController {
 	AutoService autoService;
 	@Autowired
 	AutoConverter converter;
+	@Autowired
+	MarcaService marcaService;
 
 	@RequestMapping("/{id}")
 	public @ResponseBody ResponseEntity<AutoWrapper> getById(@PathVariable("id") int id) {
@@ -51,9 +56,9 @@ public class AutoController {
 	}
 
 	@RequestMapping(value = "/auto", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity addAuto(@RequestBody AutoRequest request) {
+	public ResponseEntity addAuto(@RequestBody AutoRequest request, @RequestBody MarcaRequest mrequest) {
 		try {
-			autoService.newAuto(request.getMarca(), request.getModelo(), request.getKms(), request.getPatente(),
+			autoService.newAuto(marcaService.newMarca(mrequest.getDescripcion()),request.getModelo(), request.getKms(), request.getPatente(),
 					request.getAnio());
 			return new ResponseEntity(HttpStatus.CREATED);
 		} catch (Exception e) {
@@ -62,7 +67,7 @@ public class AutoController {
 	}
 
 	@RequestMapping(value = "/byMarca", method = RequestMethod.GET)
-	public ResponseEntity<List<AutoWrapper>> getByMarca(@RequestParam("marca") String marca) {
+	public ResponseEntity<List<AutoWrapper>> getByMarca(@RequestParam("marca") Marca marca) {
 		List<Auto> list = autoService.getByMarca(marca);
 		if (list.size() > 0) {
 			return new ResponseEntity<List<AutoWrapper>>(this.convertList(list), HttpStatus.OK);

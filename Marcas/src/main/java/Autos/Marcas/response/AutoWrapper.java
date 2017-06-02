@@ -2,9 +2,11 @@ package Autos.Marcas.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import Autos.Marcas.entities.Marca;
+
 public class AutoWrapper {
 	@JsonProperty
-	String marca;
+	Marca marca;
 	@JsonProperty
 	String modelo;
 	@JsonProperty
@@ -15,11 +17,11 @@ public class AutoWrapper {
 	int anio;
 
 	
-	public String getMarca() {
+	public Marca getMarca() {
 		return marca;
 	}
 
-	public void setMarca(String marca) {
+	public void setMarca(Marca marca) {
 		this.marca = marca;
 	}
 

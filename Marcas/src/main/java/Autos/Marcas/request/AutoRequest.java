@@ -2,13 +2,15 @@ package Autos.Marcas.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import Autos.Marcas.entities.Marca;
+
 public class AutoRequest {
 
-	public String getMarca() {
+	public Marca getMarca() {
 		return marca;
 	}
 
-	public void setMarca(String marca) {
+	public void setMarca(Marca marca) {
 		this.marca = marca;
 	}
 
@@ -45,7 +47,7 @@ public class AutoRequest {
 	}
 
 	@JsonProperty("marca")
-	String marca;
+	Marca marca;
 	@JsonProperty("modelo")
 	String modelo;
 	@JsonProperty("kms")

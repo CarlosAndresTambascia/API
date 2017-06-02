@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.stereotype.Repository;
 import Autos.Marcas.entities.Auto;
+import Autos.Marcas.entities.Marca;
 
 @Repository
 public class AutoDao extends AbstractDao<Auto> {
@@ -33,12 +34,12 @@ public class AutoDao extends AbstractDao<Auto> {
 
 	@Override
 	public void save(Auto a) {
-		a.setId(++LAST_ID);
+		a.setId(++LAST_ID);		
 		list.add(a);
 
 	}
 
-	public List<Auto> getByMarca(String marca) {
+	public List<Auto> getByMarca(Marca marca) {
 		List<Auto> r = new ArrayList<Auto>();
 		for (Auto a : list) {
 			if (marca.equals(a.getMarca())) {

@@ -3,7 +3,7 @@ package Autos.Marcas.entities;
 public class Auto {
 
 	private int id;
-	private String marca;
+	private Marca marca;
 	private String modelo;
 	private long kms;
 	private String patente;
@@ -12,7 +12,7 @@ public class Auto {
 	public Auto() {
 	}
 
-	public Auto(String marca, String modelo, long kms, String patente, int anio, int id) {
+	public Auto(Marca marca, String modelo, long kms, String patente, int anio, int id) {
 		super();
 		this.marca = marca;
 		this.modelo = modelo;
@@ -22,11 +22,11 @@ public class Auto {
 		this.id = id;
 	}
 
-	public String getMarca() {
+	public Marca getMarca() {
 		return marca;
 	}
 
-	public void setMarca(String marca) {
+	public void setMarca(Marca marca) {
 		this.marca = marca;
 	}
 
